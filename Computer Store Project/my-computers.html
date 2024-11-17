@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="./node_modules/@splidejs/splide/dist/css/splide.min.css">
+    <link rel="stylesheet" href="./node_modules/@splidejs/splide/dist/css/themes/splide-skyblue.min.css">
+    <script src="./node_modules/@splidejs/splide/dist/js/splide.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm nav-red">
+        <div class="container-fluid">
+            <a class="navbar-brand ms-1" href="./index.html">
+                <img src="./image/Logo.png" alt="" width="70px">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav ms-auto w-100">
+                    <li class="nav-item ms-auto me-3">
+                        <button class="nav-link" data-bs-toggle="modal" data-bs-target="#myModal">Add Computer</button>
+                    </li>
+                    <li class="nav-item dropdown" id="username-button">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <span id="username">Username</span>
+                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item text-dark" href="#">Profile</a></li>
+                            <li><button class="dropdown-item text-dark" onclick="logout()">Log Out</button></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid" style="margin-bottom: 500px;">
+        <div class="row mt-2">
+            <div class="col">
+                <select name="" id="" class="form-select w-25">
+                    <option value="">5</option>
+                    <option value="">10</option>
+                    <option value="">20</option>
+                    <option value="">50</option>
+                </select>
+            </div>
+            <div class="col">
+                <input type="search" class="form-control ms-auto w-25">
+            </div>
+        </div>
+        <table class="table text-center mt-2">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Photo</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+            <tr id="empty-table-row">
+                <td colspan="5">No data available in table</td>
+            </tr>
+            <tbody id="table-data"></tbody>
+        </table>
+        <p>Showing 0 to 0 of 0 entries</p>
+    </div>
+
+    <div class="modal fade" id="myModal">
+        <form action="" autocomplete="off" onsubmit="addComputer(event)">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Computer</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <ul class="nav nav-pills nav-danger">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-bs-toggle="pill" href="#home">Main</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="pill" href="#menu1">Parameters</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="pill" href="#menu2">Image</a>
+                            </li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="row">
+                            <div class="col-lg-8 col-12">
+                                <div class="tab-content" style="height: 450px;">
+                                    <!-- <form action=""> -->
+                                    <div class="tab-pane container active pt-2" id="home">
+                                        <h3>Main</h3>
+                                        <label class="form-label m-0 mt-2" for="computer-name">Name:</label>
+                                        <input type="text" name="computer-name" id="computer-name" class="form-control"
+                                            placeholder="Aspire..." onkeyup="fillNameCard()">
+
+                                        <label class="form-label m-0 mt-2" for="computer-producer">Producer:</label>
+                                        <select class="form-select" id="computer-producer" name="computer-producer"
+                                            onchange="fillProducerCard()">
+                                            <option value="HP">HP</option>
+                                            <option value="Asus">ASUS</option>
+                                            <option value="Acer">ACER</option>
+                                            <option value="Mac">Mac</option>
+                                            <option value="Lenovo">Lenovo</option>
+                                            <option value="Dell">DELL</option>
+                                            <option value="Msi">MSI</option>
+                                            <option value="Samsung">Samsung</option>
+                                            <option value="Toshiba">Toshiba</option>
+                                        </select>
+
+                                        <label class="form-label m-0 mt-2" for="computer-new">New:</label>
+                                        <select class="form-select" id="computer-new" name="computer-new"
+                                            onchange="fillNewCard()">
+                                            <option value="No">No</option>
+                                            <option value="Yes">Yes</option>
+                                        </select>
+
+                                        <label class="form-label m-0 mt-2" for="computer-price">Price:</label>
+                                        <input type="number" name="computer-price" id="computer-price"
+                                            class="form-control" placeholder="1000" min="1" max="1000000"
+                                            onkeyup="fillPriceCard()">
+
+                                        <label class="form-label m-0 mt-2"
+                                            for="computer-description">Description:</label>
+                                        <textarea class="form-control" rows="3" id="computer-description"
+                                            name="computer-description"></textarea>
+                                    </div>
+
+                                    <div class="tab-pane container fade pt-2" id="menu1">
+                                        <h3>Parametres</h3>
+
+                                        <label class="form-label m-0 mt-2" for="computer-ram">RAM:</label>
+                                        <input type="text" name="computer-ram" id="computer-ram" class="form-control"
+                                            placeholder="8GB..." onkeyup="fillRamCard()">
+
+                                        <label class="form-label m-0 mt-2" for="computer-cpu">CPU:</label>
+                                        <input type="text" name="computer-cpu" id="computer-cpu" class="form-control"
+                                            placeholder="Intel Pentium..." onkeyup="fillCpuCard()">
+
+                                        <label class="form-label m-0 mt-2" for="computer-rom">ROM:</label>
+                                        <input type="text" name="computer-rom" id="computer-rom" class="form-control"
+                                            placeholder="128GB" onkeyup="fillRomCard()">
+
+                                        <label class="form-label m-0 mt-2" for="computer-rom-type">ROM Type:</label>
+                                        <select class="form-select" id="computer-rom-type" name="computer-rom-type"
+                                            onchange="fillRomTypeCard()">
+                                            <option value="HDD">HDD</option>
+                                            <option value="SSD">SSD</option>
+                                        </select>
+
+                                        <label class="form-label m-0 mt-2" for="computer-os">OS:</label>
+                                        <select class="form-select" id="computer-os" name="computer-os"
+                                            onclick="fillOSCard()">
+                                            <option value="Windows">Windows</option>
+                                            <option value="Linux">Linux</option>
+                                            <option value="Mac">Mac</option>
+                                        </select>
+
+                                        <label class="form-label m-0 mt-2" for="computer-gpu">GPU:</label>
+                                        <input type="text" name="computer-gpu" id="computer-gpu" onkeyup="fillGpuCard()"
+                                            class="form-control" placeholder="12GB">
+                                    </div>
+                                    <div class="tab-pane container fade pt-2" id="menu2">
+                                        <form action="">
+                                            <h3>Image</h3>
+                                            <label class="form-label m-0 mt-2" for="computer-img">Image URL:</label>
+                                            <input type="text" name="computer-img" id="computer-img"
+                                                onkeyup="fillImageLinkCard()" class="form-control"
+                                                placeholder="http://...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-0">
+                                <div class="card" style="height: 500px !important;">
+                                    <div class="h-50 text-center">
+                                        <img src="" id="card-image" alt="Computer image" height="100%">
+                                    </div>
+                                    <div class="card-body h-50">
+                                        <h4 class="card-title"><span id="card-name">Name</span>,
+                                            <span id="card-producer">Producer</span>
+                                            <span class="badge rounded-pill bg-success" id="new-badge">New</span>
+                                            <span class="badge rounded-pill bg-danger" id="old-badge">Old</span>
+                                        </h4>
+                                        <table class="borderless-table w-100">
+                                            <tr>
+                                                <th>CPU:</th>
+                                                <td id="card-cpu" class="text-end"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>RAM:</th>
+                                                <td id="card-ram" class="text-end"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>ROM:</th>
+                                                <td class="text-end"><span id="card-rom"></span><span
+                                                        id="card-rom-type"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <th>GPU:</th>
+                                                <td id="card-gpu" class="text-end"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>OS:</th>
+                                                <td id="card-os" class="text-end"></td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="2">Price: <span id="card-price"></span></th>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <input type="submit" value="Add Computer" class="btn btn-success">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <footer class="site-footer mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <h6>About</h6>
+                    <p class="text-justify">Scanfcode.com <i>CODE WANTS TO BE SIMPLE </i> is an initiative to help the
+                        upcoming programmers with the code. Scanfcode focuses on providing the most efficient code or
+                        snippets as the code wants to be simple. We will help programmers build up concepts in different
+                        programming languages that include C, C++, Java, HTML, CSS, Bootstrap, JavaScript, PHP, Android,
+                        SQL and Algorithm.</p>
+                </div>
+
+                <div class="col-xs-6 col-md-3">
+                    <h6>Categories</h6>
+                    <ul class="footer-links">
+                        <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
+                        <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
+                        <li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
+                        <li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>
+                        <li><a href="http://scanfcode.com/category/android/">Android</a></li>
+                        <li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-xs-6 col-md-3">
+                    <h6>Quick Links</h6>
+                    <ul class="footer-links">
+                        <li><a href="http://scanfcode.com/about/">About Us</a></li>
+                        <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
+                        <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
+                        <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <p class="copyright-text">Copyright &copy; 2017 All Rights Reserved by
+                        <a href="#">Scanfcode</a>.
+                    </p>
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <ul class="social-icons">
+                        <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+                        <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/my-computer.js"></script>
+    <script src="./js/addcomp.js"></script>
+
+
+</body>
+
+</html>
